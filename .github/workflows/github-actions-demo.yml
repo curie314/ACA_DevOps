@@ -11,7 +11,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{env.SSH_PRIVATE_KEY}}
       - run: cat ~/.ssh/id_rsa
-      - run: ssh -o StrictHostKeyChecking=off -i /home/runner/.ssh/id_rsa aca@34.69.114.148 'docker rm -fv website && docker pull oryades/aca_devops_prof && docker run -d -p 80:80 oryades/aca_devops_prof'
+      - run: ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null aca@34.69.114.148 'docker rm -fv website && docker pull oryades/aca_devops_prof && docker run -d -p 80:80 oryades/aca_devops_prof'
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Log in to Docker Hub
