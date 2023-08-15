@@ -9,7 +9,7 @@ jobs:
       - run: cd /home/runner/.ssh && chmod 600 id_rsa   
         shell: bash
         env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_PRIVATE_KEY: ${{env.SSH_PRIVATE_KEY}}
       - run: cat ~/.ssh/id_rsa
       - run: ssh -o StrictHostKeyChecking=no -i /home/runner/.ssh/id_rsa aca@34.69.114.148 'docker rm -fv website && docker pull oryades/aca_devops_prof && docker run -d -p 80:80 oryades/aca_devops_prof'
       - name: Check out repository code
