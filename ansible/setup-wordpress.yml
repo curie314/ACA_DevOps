@@ -1,0 +1,26 @@
+- name: Setup WordPress with Docker
+  hosts: aws
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+
+    - name: Pull WordPress Docker image
+      docker_image:
+        name: wordpress:latest
+        source: pull
+        state: present
+      become: yes
+
+    - name: Start WordPress container
+      docker_container:
+        name: wordpress_container
+        image: wordpress:latest
+        ports:
+          - "80:80"
+        env:
+          WORDPRESS_DB_HOST: rds-terraform.coiff3jgsqnx.us-east-1.rds.amazonaws.com
+          WORDPRESS_DB_USER: wordpressdb
+          WORDPRESS_DB_PASSWORD: Unicorn4.21
+          WORDPRESS_DB_NAME: ExampleRDSServerInstance
+      become: yes
