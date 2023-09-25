@@ -14,6 +14,11 @@ data "aws_ami" "al" {
   owners = ["137112412989"] # Canonical
 }
 
+data "aws_vpc" "default" {
+  default = true
+}
+
+
 resource "aws_instance" "web" {
   ami           = data.aws_ami.al.id
   instance_type = "t2.micro"
@@ -53,7 +58,7 @@ resource "aws_db_instance" "rds_instance" {
 resource "aws_security_group" "allow_ssh_http" {
   name        = "allow_ssh_http"
   description = "Allow inbound traffic"
-  vpc_id      = "vpc-06139ba9813dd6daf"
+  vpc_id      = data.aws_vpc.default.id
 
   ingress {
     description      = "SSH"
@@ -91,9 +96,12 @@ resource "aws_security_group" "rds_sg" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["172.31.0.0/16"]  # Open to all IPs (you can restrict this)
-  
+    cidr_blocks = ["172.31.0.0/16"]
   }
+}
+
+data "aws_instance" "web_instance" {
+  instance_id = aws_instance.web.id
 }
 
 output "instance_ip_addr" {
@@ -102,5 +110,5 @@ output "instance_ip_addr" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDR27AiMU3o6ektjaKbM52HXPryswZd8yZ5HplU7GKwh8qRoeLJofWbJLLJjin0tekRKW+sFOYzK1e5sIkWr7ZwH/dphq4pNaS6DjizC9wjWrEDASSnXGjK6InTyZyRCavmPxX50CSjO/Ie7szlmPXHS+6O00acqpFYAet/HF79IrypVkRzIguhnZ/4lhmgO2G0N3sbdQkJMqGEiuElil1N/AtJP8Vh1DxFfVsTfOSFwYzySb+pSLkTbHv8om/LFau+tWNUnBG6CwOpuq7JgmfsteqQmL9gqiVb1oQ5BH0Xd91sVeg8N2Lg6O4iXoQhRupbCYSoLqPwr/p83f3dOwRCMOCPK0fYmFalfq47+Nb1Qpz8M6rsQYm4zRC3/NysRHyfFTuYMuMwcKF7QvawAYRbccNRp4XD87Ny4B5OWdqcaw9rToA7bFTkVBnpIuUIhk3cR8jBdnrHC7ZJDRPHApmMm150R4u0U6qew2MfRfPgQ+heBeY1nsh2KugbjOcUWM= curie@curie-Lenovo-IdeaPad-S340-15IWL"
+  public_key = file("~/.ssh/id_rsa.pub")
 }

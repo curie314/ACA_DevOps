@@ -1,8 +1,8 @@
 - name: Setup WordPress with Docker
-  hosts: aws
+  hosts: all
   remote_user: ec2-user
   become: yes
-
+  gather_facts: no
   tasks:
 
     - name: Pull WordPress Docker image
