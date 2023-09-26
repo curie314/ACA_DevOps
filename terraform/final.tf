@@ -109,7 +109,7 @@ output "instance_ip_addr" {
 }
 
 data "aws_db_instance" "rds_ip" {
-  db_instance_identifier = "rds-terraform"  # Replace with your RDS instance identifier
+  db_instance_identifier = "rds-terraform"
 }
 
 output "rds_instance_ip" {

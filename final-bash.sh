@@ -23,6 +23,6 @@ cd ansible
 
 export ANSIBLE_HOST_KEY_CHECKING=False
 
-ansible-playbook -i inventory.yml setup-wordpress.yml --extra-vars=MYSQL_HOSTNAME=$(RDS_IP)
+ansible-playbook -i inventory.yml setup-wordpress.yml --extra-vars=MYSQL_HOSTNAME=$RDS_IP
 
 
