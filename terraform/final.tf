@@ -108,6 +108,15 @@ output "instance_ip_addr" {
   value = aws_instance.web.public_ip
 }
 
+data "aws_db_instance" "rds_ip" {
+  db_instance_identifier = "rds-terraform"  # Replace with your RDS instance identifier
+}
+
+output "rds_instance_ip" {
+  value = data.aws_db_instance.rds_ip.address
+}
+
+
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
   public_key = file("~/.ssh/id_rsa.pub")

@@ -19,7 +19,7 @@
         ports:
           - "80:80"
         env:
-          WORDPRESS_DB_HOST: rds-terraform.coiff3jgsqnx.us-east-1.rds.amazonaws.com
+          WORDPRESS_DB_HOST: "{{ var.MYSQL_HOSTNAME }}"
           WORDPRESS_DB_USER: wordpressdb
           WORDPRESS_DB_PASSWORD: Unicorn4.21
           WORDPRESS_DB_NAME: ExampleRDSServerInstance
