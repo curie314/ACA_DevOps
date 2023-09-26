@@ -21,6 +21,11 @@
         env:
           WORDPRESS_DB_HOST: "{{ MYSQL_HOSTNAME }}"
           WORDPRESS_DB_USER: wordpressdb
-          WORDPRESS_DB_PASSWORD: Unicorn4.21
+          WORDPRESS_DB_PASSWORD: "{{ WORDPRESS_DB_PASSWORD }}"
           WORDPRESS_DB_NAME: ExampleRDSServerInstance
       become: yes
+
+  vars_prompt:
+           - name: WORDPRESS_DB_PASSWORD
+             prompt: "Enter the WordPress Database Password"
+             private: yes 
