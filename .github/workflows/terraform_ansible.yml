@@ -32,6 +32,12 @@ jobs:
           cd terraform
           terraform apply -auto-approve
 
+      - name: Terraform Output
+        run: |
+          cd terraform
+          chmod +x run-terraform.sh
+          ./run-terraform.sh    
+
       - name: Capture Terraform Output
         run: |
         terraform output | awk -F'"' '/"/ {print $2}' | head -n 1 >> ../ansible/inventory.yml
