@@ -21,6 +21,10 @@ jobs:
           # terraform --version
         env:
           TF_IN_AUTOMATION: "true"
+  
+      - name: Generate SSH Key
+        run: |
+          ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ""
 
       - name: Initialize Terraform
         run: |
