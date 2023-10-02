@@ -71,6 +71,9 @@ jobs:
           export ANSIBLE_HOST_KEY_CHECKING=False
           ansible-playbook -i inventory.yml setup-wordpress.yml --extra-vars=MYSQL_HOSTNAME=$RDS_IP
 
+      - name: Stop Execution 2 Minutes Before Destroy
+        run: sleep 120
+
       - name: Destroy Terraform Resources
         run: |
           cd terraform
