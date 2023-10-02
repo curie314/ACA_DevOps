@@ -18,11 +18,12 @@
         image: wordpress:latest
         ports:
           - "80:80"
+          - "3306:3306"  
         env:
           WORDPRESS_DB_HOST: "{{ MYSQL_HOSTNAME }}"
           WORDPRESS_DB_USER: wordpressdb
           WORDPRESS_DB_PASSWORD: "{{ WORDPRESS_DB_PASSWORD }}"
-          WORDPRESS_DB_NAME: ExampleRDSServerInstance
+          WORDPRESS_DB_NAME: mydb
       become: yes
 
   vars_prompt:
