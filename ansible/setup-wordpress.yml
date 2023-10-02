@@ -22,7 +22,7 @@
         env:
           WORDPRESS_DB_HOST: "{{ MYSQL_HOSTNAME }}"
           WORDPRESS_DB_USER: wordpressdb
-          WORDPRESS_DB_PASSWORD: "{{ WORDPRESS_DB_PASSWORD }}"
+          WORDPRESS_DB_PASSWORD: "{{ MYSQL_PASSWORD }}"
           WORDPRESS_DB_NAME: mydb
       become: yes
 
