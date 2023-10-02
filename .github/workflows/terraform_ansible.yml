@@ -69,7 +69,7 @@ jobs:
         run: |
           cd ansible
           export ANSIBLE_HOST_KEY_CHECKING=False
-          ansible-playbook -i inventory.yml setup-wordpress.yml --extra-vars=MYSQL_HOSTNAME=$RDS_IP MYSQL_PASSWORD=${{ secrets.WORDPRESS_DB_PASSWORD }}
+          ansible-playbook -i inventory.yml setup-wordpress.yml -e MYSQL_HOSTNAME=$RDS_IP -e MYSQL_PASSWORD=${{ secrets.WORDPRESS_DB_PASSWORD }}
 
       - name: Stop Execution 2 Minutes Before Destroy
         run: sleep 120
