@@ -1,0 +1,16 @@
+1. Setup Github repository for the project 
+2. Use Terraform to provision EC2 instance in AWS
+    a. t2.micro
+    b. Enable SSH access to it (Security Group)
+    c. Use your Public SSH key for accessing
+    b. Use elastic IP and attach it to EC2 instance
+3. Use Terraform to provision RDS instance in AWS
+    a. t2.micro
+    b. MySQL
+    c. Access from EC2 instance (Security Group)
+4. Use Ansible to setup a Wordpress application using Docker on EC2 instance
+    a. Install Docker
+    b. Start Wordpress Container
+    c. Configure it to use below-mentioned AWS RDS for MySQL
+5. Use Github personal repository to store all the codebase of the project 
+6. Setup Github Actions as CI/CD for pipeline to provision above mentioned infrastructure
