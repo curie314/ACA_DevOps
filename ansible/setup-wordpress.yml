@@ -28,5 +28,5 @@
 
   vars_prompt:
            - name: WORDPRESS_DB_PASSWORD
-             prompt: "Enter the WordPress Database Password"
+             prompt: "Enter the WordPress Database Passwor"
              private: yes 
